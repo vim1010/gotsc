@@ -13,14 +13,9 @@ func main() {
 	tscKey := os.Getenv("TSC_KEY")
 	tscSecret := os.Getenv("TSC_SECRET")
 	client := tenablesc.NewClient(tscBaseURL)
-	// fmt.Println(tscBaseURL)
 	client.SetAPIKey(tscKey, tscSecret)
 
-	// var analysisResult []tenablesc.VulnSumIPResult
 	var res []tenablesc.VulnDetailsResult
-	// Composing the query structs is a combination of reading the docs
-	// and using browser Developer Tools to identify the right fields by
-	// building the queries in the UI.
 	_, err := client.Analyze(&tenablesc.Analysis{
 		Type: "vuln",
 		Query: tenablesc.AnalysisQuery{
@@ -33,8 +28,6 @@ func main() {
 					Operator:   "=",
 					Value: []map[string]string{
 						{
-							// if this weren't an example, I'd recommend looking up your
-							// repo ID first. your accessible repos may vary.
 							"id": "1",
 						},
 					},
