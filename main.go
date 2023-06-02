@@ -16,8 +16,8 @@ func main() {
 	// fmt.Println(tscBaseURL)
 	client.SetAPIKey(tscKey, tscSecret)
 
-	var analysisResult []tenablesc.VulnSumIPResult
-
+	// var analysisResult []tenablesc.VulnSumIPResult
+	var res []tenablesc.VulnDetailsResult
 	// Composing the query structs is a combination of reading the docs
 	// and using browser Developer Tools to identify the right fields by
 	// building the queries in the UI.
@@ -26,7 +26,7 @@ func main() {
 		Query: tenablesc.AnalysisQuery{
 			Type:       "vuln",
 			SourceType: "cumulative",
-			Tool:       "sumip",
+			Tool:       "vulndetails",
 			Filters: []tenablesc.AnalysisFilter{
 				{
 					FilterName: "repository",
@@ -44,8 +44,10 @@ func main() {
 		SourceType:    "cumulative",
 		SortField:     "score",
 		SortDirection: "desc",
+		StartOffset: "0",
+		EndOffset: "1000",
 	},
-		&analysisResult,
+		&res,
 	)
 
 	if err != nil {
@@ -53,6 +55,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	d, err := json.Marshal(analysisResult)
+	d, err := json.Marshal(res)
 	fmt.Println(string(d))
 }
