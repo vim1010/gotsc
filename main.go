@@ -37,8 +37,8 @@ func main() {
 		SourceType:    "cumulative",
 		SortField:     "score",
 		SortDirection: "desc",
-		StartOffset: "0",
-		EndOffset: "1000",
+		StartOffset:   "0",
+		EndOffset:     "1000",
 	},
 		&res,
 	)
